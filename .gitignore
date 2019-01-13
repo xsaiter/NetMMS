@@ -1,0 +1,7 @@
+[Oo]bj/
+[Bb]in/
+.vs/
+project.lock.json
+*.user
+artifacts/
+packages/

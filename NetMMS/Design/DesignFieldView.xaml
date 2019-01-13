@@ -1,0 +1,103 @@
+﻿<UserControl 
+    x:Class="NetMMS.Design.DesignFieldView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"                          
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"              
+    xmlns:converters="clr-namespace:NetMMS.Converters"
+    xmlns:cc="clr-namespace:NetMMS.CustomControls"             
+    xmlns:common="clr-namespace:NetMMS.Common"
+    xmlns:design="clr-namespace:NetMMS.Design"
+    mc:Ignorable="d">
+    
+    <UserControl.DataContext>
+        <design:DesignFieldVM/>
+    </UserControl.DataContext>
+
+    <UserControl.Resources>
+        <converters:ScaleConverter x:Key="ScaleConverter"/>
+        <Style x:Key="ItemsControlMainStyle" TargetType="{x:Type ItemsControl}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ItemsControl}">
+                        <Grid>
+                            <cc:ClutchScrollViewer
+                                x:Name="_scrollViewer"
+                                Background="Transparent"
+                                HorizontalScrollBarVisibility="Visible"
+                                VerticalScrollBarVisibility="Visible"
+                                Scale="{Binding ZoomService.Zoom}">
+                                <ItemsPresenter/>
+                            </cc:ClutchScrollViewer>
+
+                            <Slider
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Minimum="10"
+                                Maximum="500"
+                                Margin="0"
+                                Width="100"
+                                Ticks="25,50,75,100,125,150,200,300,400,500,600"
+                                Value="{Binding Mode=TwoWay, Path=ZoomService.Zoom}"
+                                IsSnapToTickEnabled="True"
+                                IsMoveToPointEnabled="False"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <Border Padding="1,1,1,1">
+        <Grid Background="White">
+            <ItemsControl Style="{StaticResource ItemsControlMainStyle}" ItemsSource="{Binding Sprites}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <cc:ActivityCanvas 
+                            x:Name="PART_VisualLayer"
+                            AllowDrop="True"
+                            Background="White"
+                            IsItemsHost="True"
+                            MinHeight="800"
+                            MinWidth="1000">
+                            
+                            <cc:ActivityCanvas.LayoutTransform>
+                                <ScaleTransform
+                                    ScaleX="{Binding Converter={StaticResource ScaleConverter}, Path=ZoomService.Zoom}"
+                                    ScaleY="{Binding Converter={StaticResource ScaleConverter}, Path=ZoomService.Zoom}"/>
+                            </cc:ActivityCanvas.LayoutTransform>
+
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Drop">
+                                    <common:EventToCommand Command="{Binding DropTargetCommand}" />
+                                </i:EventTrigger>
+                                
+                                <i:EventTrigger EventName="DragOver">
+                                    <common:EventToCommand Command="{Binding DragOverCommand}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            
+                        </cc:ActivityCanvas>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                
+                <ItemsControl.ItemContainerStyle>
+                    <Style TargetType="{x:Type ContentPresenter}">
+                        <Setter Property="cc:ActivityCanvas.RenderTransform">
+                            <Setter.Value>
+                                <TransformGroup>
+                                    <TranslateTransform X="{Binding X}" Y="{Binding Y}"/>
+                                    <RotateTransform Angle="0"/>
+                                </TransformGroup>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="ContentControl.Width" Value="{Binding Width}"/>
+                        <Setter Property="ContentControl.Height" Value="{Binding Height}"/>
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
+            </ItemsControl>
+        </Grid>
+    </Border>
+
+</UserControl>

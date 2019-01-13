@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2048
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetMMS", "NetMMS\NetMMS.csproj", "{971B5A09-22CA-45AD-AF81-1F89830F077D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{971B5A09-22CA-45AD-AF81-1F89830F077D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{971B5A09-22CA-45AD-AF81-1F89830F077D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{971B5A09-22CA-45AD-AF81-1F89830F077D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{971B5A09-22CA-45AD-AF81-1F89830F077D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BA261955-519C-45E5-B53A-BB1164F97702}
+	EndGlobalSection
+EndGlobal

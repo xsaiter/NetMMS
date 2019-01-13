@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="NetMMS.Pallete.PalleteFieldView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"             
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:common="clr-namespace:NetMMS.Common"
+             xmlns:pallete="clr-namespace:NetMMS.Pallete"
+             mc:Ignorable="d">
+    <UserControl.DataContext>
+        <pallete:PalleteFieldVM/>
+    </UserControl.DataContext>
+   
+    <UserControl.Resources>        
+    </UserControl.Resources>
+
+    <StackPanel>
+        <Expander Header="Toolbox" Padding="4">
+            <ItemsControl ItemsSource="{Binding Path=Items}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="PreviewMouseLeftButtonDown">
+                        <common:EventToCommand Command="{Binding PreviewMouseLeftButtonDownCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+
+            </ItemsControl>
+        </Expander>
+    </StackPanel>
+
+</UserControl>

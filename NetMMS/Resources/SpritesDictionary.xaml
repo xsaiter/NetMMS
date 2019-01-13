@@ -1,0 +1,45 @@
+﻿<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ViewModels="clr-namespace:NetMMS.Design"
+    xmlns:Resources="clr-namespace:NetMMS.Resources"                    
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"                     
+    xmlns:common="clr-namespace:NetMMS.Common">
+
+    <DataTemplate DataType="{x:Type ViewModels:ComputerVM}">
+        <ContentControl 
+            x:Name="ComputerContentControl" 
+            Style="{StaticResource {ComponentResourceKey TypeInTargetAssembly={x:Type Resources:CustomResources}, ResourceId=IdSpriteStyle}}">
+            <ContentControl.Content>
+                <Rectangle IsHitTestVisible="False">
+                    <Rectangle.Fill>
+                        <VisualBrush>
+                            <VisualBrush.Visual>
+                                <StackPanel>
+                                    <Image Source="../Resources/Images/Pallete/Central Node.png"/>
+                                </StackPanel>
+                            </VisualBrush.Visual>
+                        </VisualBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+            </ContentControl.Content>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="PreviewMouseDown">
+                    <common:EventToCommand Command="{Binding PreviewMouseDownCommand}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </ContentControl>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type ViewModels:PrinterVM}">
+        <Path Stroke="Blue">
+            <Path.Data>
+                <PathGeometry>
+                    <PathFigure StartPoint="10,10" Segments="{Binding}">
+                    </PathFigure>
+                </PathGeometry>
+            </Path.Data>
+        </Path>
+    </DataTemplate>
+
+</ResourceDictionary>
